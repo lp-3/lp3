@@ -1,0 +1,25 @@
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.7;
+contract Bank{
+    address public owner;
+    constructor() {
+        owner=msg.sender;
+    }
+    function deposit() external payable{
+        require(msg.value ==2 ether,"Please send Two Ether");
+    }
+    function send(address payable _to)external payable {
+        require(msg.sender==owner, "No");
+        _to.transfer(1000000000000000000);
+    }
+    // function withdraw ()external{
+    //     require(msg.sender==owner, "No");
+    //     msg.sender.transfer(address(this).balance);
+    // }
+    modifier OnlyBy(){
+        if (msg.sender==owner){
+        _;
+        }
+        
+    }
+}
